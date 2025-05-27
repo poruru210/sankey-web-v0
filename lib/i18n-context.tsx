@@ -17,9 +17,6 @@ const translations = {
     "nav.dashboard": "License Dashboard",
     "nav.developer": "Developer Guide",
     "nav.settings": "Settings",
-    "nav.documentation": "Documentation",
-    "nav.support": "Support",
-    "nav.profile": "Profile",
     "nav.signOut": "Sign Out",
     "nav.menu": "Menu",
 

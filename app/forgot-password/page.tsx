@@ -18,6 +18,7 @@ import { useTheme } from "@/lib/theme-context"
 import { useI18n } from "@/lib/i18n-context"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
+import ParticlesBackground from "@/app/components/ParticlesBackground";
 
 export default function ForgotPasswordPage() {
   const router = useRouter()
@@ -85,81 +86,7 @@ export default function ForgotPasswordPage() {
     return (
       <div className="min-h-screen theme-bg-gradient flex items-center justify-center relative overflow-hidden">
         {/* Particles Background */}
-        <Particles
-          id="tsparticles"
-          init={particlesInit}
-          loaded={particlesLoaded}
-          options={{
-            background: {
-              color: {
-                value: "transparent",
-              },
-            },
-            fpsLimit: 120,
-            interactivity: {
-              events: {
-                onClick: {
-                  enable: true,
-                  mode: "push",
-                },
-                onHover: {
-                  enable: true,
-                  mode: "repulse",
-                },
-                resize: true,
-              },
-              modes: {
-                push: {
-                  quantity: 4,
-                },
-                repulse: {
-                  distance: 200,
-                  duration: 0.4,
-                },
-              },
-            },
-            particles: {
-              color: {
-                value: theme === "dark" ? "#10b981" : "#059669",
-              },
-              links: {
-                color: theme === "dark" ? "#10b981" : "#059669",
-                distance: 150,
-                enable: true,
-                opacity: theme === "dark" ? 0.1 : 0.2,
-                width: 1,
-              },
-              move: {
-                direction: "none",
-                enable: true,
-                outModes: {
-                  default: "bounce",
-                },
-                random: false,
-                speed: 1,
-                straight: false,
-              },
-              number: {
-                density: {
-                  enable: true,
-                  area: 800,
-                },
-                value: 80,
-              },
-              opacity: {
-                value: theme === "dark" ? 0.3 : 0.4,
-              },
-              shape: {
-                type: "circle",
-              },
-              size: {
-                value: { min: 1, max: 3 },
-              },
-            },
-            detectRetina: true,
-          }}
-          className="absolute inset-0 z-0"
-        />
+        <ParticlesBackground theme={theme} particlesInit={particlesInit}/>
 
         {/* Theme & Language Controls */}
         <div className="absolute top-4 right-4 z-20 flex items-center space-x-2">
