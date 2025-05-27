@@ -2090,9 +2090,10 @@ function Component() {
       </AlertDialog>
 
       {/* Plan Change Dialog */}
+      {/* Plan Change Dialog */}
       <Dialog open={planChangeDialog} onOpenChange={setPlanChangeDialog}>
-        <DialogContent className="theme-card-bg border-emerald-500/20 theme-text-primary max-w-4xl">
-          <DialogHeader>
+        <DialogContent className="theme-card-bg border-emerald-500/20 theme-text-primary max-w-4xl max-h-[100vh] overflow-y-auto">
+          <DialogHeader className="sticky top-0 pb-4 border-b border-emerald-500/20">
             <DialogTitle className="flex items-center">
               <Key className="w-5 h-5 mr-2 text-emerald-400" />
               {t("settings.changePlan")}
@@ -2100,85 +2101,85 @@ function Component() {
             <DialogDescription className="theme-text-secondary">{t("settings.choosePlan")}</DialogDescription>
           </DialogHeader>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 py-4 md:py-6 px-1">
             {(["Free", "Basic", "Pro"] as const).map((plan) => (
-              <div
-                key={plan}
-                className={`p-6 rounded-lg border-2 transition-all cursor-pointer ${
-                  currentPlan === plan
-                    ? "border-emerald-500 bg-emerald-500/10"
-                    : "border-emerald-500/20 hover:border-emerald-500/40"
-                }`}
-                onClick={() => setCurrentPlan(plan)}
-              >
-                <div className="text-center space-y-4">
-                  <div
-                    className={`inline-flex items-center justify-center w-12 h-12 rounded-lg ${
-                      plan === "Free" ? "bg-gray-500/20" : plan === "Basic" ? "bg-blue-500/20" : "bg-purple-500/20"
+                <div
+                    key={plan}
+                    className={`p-4 md:p-6 rounded-lg border-2 transition-all cursor-pointer ${
+                        currentPlan === plan
+                            ? "border-emerald-500 bg-emerald-500/10"
+                            : "border-emerald-500/20 hover:border-emerald-500/40"
                     }`}
-                  >
-                    {plan === "Free" && <Shield className="w-6 h-6 text-gray-400" />}
-                    {plan === "Basic" && <Key className="w-6 h-6 text-blue-400" />}
-                    {plan === "Pro" && <FileKey className="w-6 h-6 text-purple-400" />}
-                  </div>
-
-                  <div>
-                    <h3 className="text-xl font-bold theme-text-primary">{plan}</h3>
-                    <div className="text-2xl font-bold theme-text-emerald mt-2">
-                      ${planLimits[plan].price}
-                      <span className="text-sm theme-text-muted">/month</span>
+                    onClick={() => setCurrentPlan(plan)}
+                >
+                  <div className="text-center space-y-3 md:space-y-4">
+                    <div
+                        className={`inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-lg ${
+                            plan === "Free" ? "bg-gray-500/20" : plan === "Basic" ? "bg-blue-500/20" : "bg-purple-500/20"
+                        }`}
+                    >
+                      {plan === "Free" && <Shield className="w-5 h-5 md:w-6 md:h-6 text-gray-400" />}
+                      {plan === "Basic" && <Key className="w-5 h-5 md:w-6 md:h-6 text-blue-400" />}
+                      {plan === "Pro" && <FileKey className="w-5 h-5 md:w-6 md:h-6 text-purple-400" />}
                     </div>
-                  </div>
 
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center justify-between">
-                      <span className="theme-text-secondary">{t("settings.monthlyLicenses")}:</span>
-                      <span className="theme-text-primary font-medium">
+                    <div>
+                      <h3 className="text-lg md:text-xl font-bold theme-text-primary">{plan}</h3>
+                      <div className="text-xl md:text-2xl font-bold theme-text-emerald mt-2">
+                        ${planLimits[plan].price}
+                        <span className="text-xs md:text-sm theme-text-muted">/month</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 text-xs md:text-sm">
+                      <div className="flex items-center justify-between">
+                        <span className="theme-text-secondary">{t("settings.monthlyLicenses")}:</span>
+                        <span className="theme-text-primary font-medium">
                         {planLimits[plan].monthlyLicenses === -1
-                          ? t("settings.unlimited")
-                          : planLimits[plan].monthlyLicenses}
+                            ? t("settings.unlimited")
+                            : planLimits[plan].monthlyLicenses}
                       </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="theme-text-secondary">{t("settings.activeLicenses")}:</span>
-                      <span className="theme-text-primary font-medium">
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="theme-text-secondary">{t("settings.activeLicenses")}:</span>
+                        <span className="theme-text-primary font-medium">
                         {planLimits[plan].activeLicenses === -1
-                          ? t("settings.unlimited")
-                          : planLimits[plan].activeLicenses}
+                            ? t("settings.unlimited")
+                            : planLimits[plan].activeLicenses}
                       </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="theme-text-secondary">{t("settings.apiCalls")}:</span>
-                      <span className="theme-text-primary font-medium">
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="theme-text-secondary">{t("settings.apiCalls")}:</span>
+                        <span className="theme-text-primary font-medium">
                         {planLimits[plan].apiCalls === -1
-                          ? t("settings.unlimited")
-                          : planLimits[plan].apiCalls.toLocaleString()}
+                            ? t("settings.unlimited")
+                            : planLimits[plan].apiCalls.toLocaleString()}
                       </span>
+                      </div>
                     </div>
-                  </div>
 
-                  {currentPlan === plan && (
-                    <Badge className="bg-emerald-500 text-white">{t("settings.currentPlan")}</Badge>
-                  )}
+                    {currentPlan === plan && (
+                        <Badge className="bg-emerald-500 text-white text-xs">{t("settings.currentPlan")}</Badge>
+                    )}
+                  </div>
                 </div>
-              </div>
             ))}
           </div>
 
-          <DialogFooter>
+          <DialogFooter className="pt-4 border-t border-emerald-500/20 flex-col sm:flex-row gap-2 sm:gap-0">
             <Button
-              variant="outline"
-              onClick={() => setPlanChangeDialog(false)}
-              className="border-emerald-500/40 theme-text-secondary hover:bg-emerald-500/20"
+                variant="outline"
+                onClick={() => setPlanChangeDialog(false)}
+                className="border-emerald-500/40 theme-text-secondary hover:bg-emerald-500/20 w-full sm:w-auto"
             >
               {t("actions.cancel")}
             </Button>
             <Button
-              onClick={() => {
-                // Here you would handle the plan change
-                setPlanChangeDialog(false)
-              }}
-              className="bg-emerald-500 hover:bg-emerald-600 text-white"
+                onClick={() => {
+                  // Here you would handle the plan change
+                  setPlanChangeDialog(false)
+                }}
+                className="bg-emerald-500 hover:bg-emerald-600 text-white w-full sm:w-auto"
             >
               {t("settings.updatePlan")}
             </Button>
