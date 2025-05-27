@@ -1,0 +1,332 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+
+    /* Light theme colors */
+    --light-bg-primary: 255 255 255;
+    --light-bg-secondary: 248 250 252;
+    --light-bg-tertiary: 241 245 249;
+    --light-text-primary: 15 23 42;
+    --light-text-secondary: 71 85 105;
+    --light-text-muted: 148 163 184;
+    --light-border: 226 232 240;
+    --light-emerald: 16 185 129;
+    --light-emerald-light: 167 243 208;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+
+  .light {
+    /* Light mode background gradients */
+    --bg-gradient-from: rgb(248, 250, 252);
+    --bg-gradient-via: rgb(241, 245, 249);
+    --bg-gradient-to: rgb(248, 250, 252);
+
+    /* Light mode particles */
+    --particles-color: rgb(16, 185, 129);
+    --particles-links-color: rgb(16, 185, 129);
+
+    /* Light mode card backgrounds */
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --card-border: rgba(16, 185, 129, 0.2);
+
+    /* Light mode text colors */
+    --text-primary: rgb(15, 23, 42);
+    --text-secondary: rgb(71, 85, 105);
+    --text-muted: rgb(148, 163, 184);
+    --text-emerald: rgb(5, 150, 105);
+
+    /* Light mode input styles */
+    --input-bg: rgb(255, 255, 255);
+    --input-text: rgb(15, 23, 42);
+    --input-placeholder: rgb(107, 114, 128);
+    --input-border: rgba(16, 185, 129, 0.3);
+  }
+
+  .dark {
+    /* Dark mode background gradients */
+    --bg-gradient-from: rgb(15, 23, 42);
+    --bg-gradient-via: rgb(30, 41, 59);
+    --bg-gradient-to: rgb(15, 23, 42);
+
+    /* Dark mode particles */
+    --particles-color: rgb(16, 185, 129);
+    --particles-links-color: rgb(16, 185, 129);
+
+    /* Dark mode card backgrounds */
+    --card-bg: rgba(30, 41, 59, 0.6);
+    --card-border: rgba(16, 185, 129, 0.2);
+
+    /* Dark mode text colors */
+    --text-primary: rgb(248, 250, 252);
+    --text-secondary: rgba(16, 185, 129, 0.7);
+    --text-muted: rgba(16, 185, 129, 0.4);
+    --text-emerald: rgb(16, 185, 129);
+
+    /* Dark mode input styles */
+    --input-bg: rgba(30, 41, 59, 0.5);
+    --input-text: rgb(248, 250, 252);
+    --input-placeholder: rgba(16, 185, 129, 0.5);
+    --input-border: rgba(16, 185, 129, 0.2);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom theme classes */
+.theme-bg-gradient {
+  background: linear-gradient(to bottom right, var(--bg-gradient-from), var(--bg-gradient-via), var(--bg-gradient-to));
+}
+
+.theme-card-bg {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+}
+
+.theme-text-primary {
+  color: var(--text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+
+.theme-text-muted {
+  color: var(--text-muted);
+}
+
+.theme-text-emerald {
+  color: var(--text-emerald);
+}
+
+/* Input field styles */
+.theme-input {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border-color: var(--input-border);
+  border-width: 1px;
+  border-style: solid;
+}
+
+.theme-input::placeholder {
+  color: var(--input-placeholder);
+}
+
+.theme-input:focus {
+  border-color: rgb(16, 185, 129);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+/* Input placeholder and select text size */
+.theme-input {
+  font-size: 0.875rem; /* 14px */
+}
+
+.theme-input::placeholder {
+  font-size: 0.875rem; /* 14px */
+}
+
+.theme-select {
+  font-size: 0.875rem; /* 14px */
+  border-width: 1px;
+  border-style: solid;
+}
+
+/* Light mode specific styles */
+.light .theme-card-bg {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+/* Ensure dialogs use the same background in light mode */
+.light [role="dialog"] {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.light .bg-slate-800 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.light .bg-slate-900 {
+  background-color: rgb(255, 255, 255);
+}
+
+.light .bg-slate-700 {
+  background-color: rgb(241, 245, 249);
+}
+
+.light .text-white {
+  color: rgb(15, 23, 42);
+}
+
+.light .text-emerald-100 {
+  color: rgb(5, 150, 105);
+}
+
+.light .text-emerald-200 {
+  color: rgb(16, 185, 129);
+}
+
+.light .text-emerald-300 {
+  color: rgb(34, 197, 94);
+}
+
+.light .border-emerald-500\/20 {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.light .bg-emerald-500\/10 {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.light .bg-emerald-500\/20 {
+  background-color: rgba(16, 185, 129, 0.2);
+}
+
+.light .hover\:bg-emerald-500\/20:hover {
+  background-color: rgba(16, 185, 129, 0.2);
+}
+
+.light .bg-slate-900\/40 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.light .bg-slate-900\/50 {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.light .bg-slate-800\/60 {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.light .bg-slate-900\/95 {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.light .backdrop-blur-md {
+  backdrop-filter: blur(4px);
+}
+
+/* Light mode button styles - keep white text on dark green backgrounds */
+.light .bg-emerald-500 {
+  background-color: rgb(5, 150, 105);
+  color: rgb(255, 255, 255);
+}
+
+.light .hover\:bg-emerald-600:hover {
+  background-color: rgb(4, 120, 87);
+  color: rgb(255, 255, 255);
+}
+
+.light .focus\:bg-emerald-600:focus {
+  background-color: rgb(4, 120, 87);
+  color: rgb(255, 255, 255);
+}
+
+/* Light mode badge styles - keep white text on dark green backgrounds */
+.light .bg-emerald-500.hover\:bg-emerald-600 {
+  background-color: rgb(5, 150, 105);
+  color: rgb(255, 255, 255);
+}
+
+/* Light mode filter clear button improvement */
+.light .filter-clear-button {
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: rgb(5, 150, 105);
+}
+
+.light .filter-clear-button:hover {
+  background-color: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: rgb(4, 120, 87);
+}
+
+.light .filter-clear-button:focus {
+  background-color: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: rgb(4, 120, 87);
+}
+
+/* Reject button styles for dark mode */
+.dark .reject-button {
+  @apply border-red-500 text-red-400 hover:bg-red-500/20 hover:text-red-300 focus:text-red-300 focus:bg-red-500/20;
+  background-color: rgba(30, 41, 59, 0.5); /* Same as dark mode card background */
+}
+
+.light .reject-button {
+  @apply border-red-500 text-red-600 hover:bg-red-50 hover:text-red-700 focus:text-red-700 focus:bg-red-50;
+  background-color: rgba(255, 255, 255, 0.8); /* Same as light mode card background */
+}
+
+/* Deactivate button styles */
+.dark .deactivate-button {
+  @apply border-red-500 text-red-400 hover:bg-red-500/20 hover:border-red-400 hover:text-red-300 focus:text-red-300 focus:bg-red-500/20 focus:border-red-400;
+  background-color: rgba(30, 41, 59, 0.5); /* Same as dark mode card background */
+}
+
+.light .deactivate-button {
+  @apply border-red-500 text-red-600 hover:bg-red-50 hover:border-red-600 hover:text-red-700 focus:text-red-700 focus:bg-red-50 focus:border-red-600;
+  background-color: rgba(255, 255, 255, 0.8); /* Same as light mode card background */
+}
