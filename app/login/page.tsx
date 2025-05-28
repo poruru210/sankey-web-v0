@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useCallback, useEffect } from "react"
+import { useState, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,8 +12,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Eye, EyeOff, Lock, Mail, AlertCircle, Shield, Key, FileKey } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import type { Container, Engine } from "tsparticles-engine"
-import { loadSlim } from "tsparticles-slim"
+import type { Container, Engine } from "@tsparticles/engine"
+import { loadSlim } from "@tsparticles/slim"
 import { useTheme } from "@/lib/theme-context"
 import { useI18n } from "@/lib/i18n-context"
 import {PasswordManagerSafeForm} from "@/app/components/PasswordManagerSafeForm";

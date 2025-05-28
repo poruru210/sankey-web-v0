@@ -7,8 +7,8 @@ import {ThemeToggle} from "@/components/theme-toggle";
 import {LanguageToggle} from "@/components/language-toggle";
 import ParticlesBackground from "@/app/components/ParticlesBackground";
 import {useTheme} from "next-themes";
-import type {Container, Engine} from "tsparticles-engine";
-import {loadSlim} from "tsparticles-slim";
+import { loadSlim } from "@tsparticles/slim"
+import type { Container, Engine } from "@tsparticles/engine"
 import {MobileHeader} from "@/app/components/mobile-header";
 
 export default function ClientLayout({

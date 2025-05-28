@@ -8,17 +8,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { ArrowLeft, Mail, AlertCircle, CheckCircle, Shield, Key, FileKey } from "lucide-react"
+import { ArrowLeft, Mail, AlertCircle, Shield, Key, FileKey } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import Particles from "react-tsparticles"
-import type { Container, Engine } from "tsparticles-engine"
-import { loadSlim } from "tsparticles-slim"
+import { loadSlim } from "@tsparticles/slim"
+import type { Container, Engine } from "@tsparticles/engine"
 import { useTheme } from "@/lib/theme-context"
 import { useI18n } from "@/lib/i18n-context"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { LanguageToggle } from "@/components/language-toggle"
-import ParticlesBackground from "@/app/components/ParticlesBackground";
 
 export default function ForgotPasswordPage() {
   const router = useRouter()

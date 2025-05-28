@@ -14,8 +14,6 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { Shield, Clock, CheckCircle, History, X, AlertTriangle } from "lucide-react"
-import type { Container, Engine } from "tsparticles-engine"
-import { loadSlim } from "tsparticles-slim"
 
 // Import dashboard components
 import { StatsCards } from "./components/stats-cards"

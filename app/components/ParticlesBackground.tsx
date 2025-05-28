@@ -2,49 +2,55 @@
 
 import { useMemo, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import type {Container, Engine, IOptions, RecursivePartial} from "tsparticles-engine";
-import dynamic from "next/dynamic";
-
-// Particlesコンポーネントを動的インポートでSSRを無効化
-const Particles = dynamic(() => import("react-tsparticles"), {
-    ssr: false,
-    loading: () => <div className="absolute inset-0 z-0" />
-});
+import Particles from "@tsparticles/react";
+import type { ISourceOptions } from "@tsparticles/engine";
+import { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
 type ParticlesBackgroundProps = {
     theme?: "light" | "dark";
-    particlesInit?: (engine: Engine) => Promise<void>;
-    particlesLoaded?: (container?: Container) => Promise<void>;
     className?: string;
 };
 
 export default function ParticlesBackground({
                                                 theme: propTheme,
-                                                particlesInit,
-                                                particlesLoaded,
                                                 className = "",
                                             }: ParticlesBackgroundProps) {
     const { theme: currentTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
+    const [engineInitialized, setEngineInitialized] = useState(false);
 
-    // マウント状態を管理してハイドレーションエラーを防ぐ
     useEffect(() => {
         setMounted(true);
     }, []);
 
-    // propTheme が提供されていればそれを使用、そうでなければ currentTheme を使用
+    // エンジン初期化
+    useEffect(() => {
+        initParticlesEngine(async (engine) => {
+            await loadSlim(engine);
+            setEngineInitialized(true);
+        });
+    }, []);
+
     const effectiveTheme = propTheme || (currentTheme as "light" | "dark") || "dark";
 
-    const options = useMemo((): RecursivePartial<IOptions> => ({
+    const options: ISourceOptions = useMemo(() => ({
         background: {
-            color: { value: "transparent" },
+            color: "transparent",
         },
         fpsLimit: 120,
         interactivity: {
             events: {
                 onClick: { enable: true, mode: "push" },
-                onHover: { enable: true, mode: "repulse" },
-                resize: true,
+                onHover: {
+                    enable: true,
+                    mode: "repulse",
+                    parallax: { enable: false, force: 2, smooth: 10 }
+                },
+                resize: {
+                    enable: true,
+                    delay: 0.5
+                },
             },
             modes: {
                 push: { quantity: 4 },
@@ -79,16 +85,13 @@ export default function ParticlesBackground({
         detectRetina: true,
     }), [effectiveTheme]);
 
-    // マウントされていない場合はプレースホルダーを表示
-    if (!mounted) {
+    if (!mounted || !engineInitialized) {
         return <div className={`absolute inset-0 z-0 ${className}`} />;
     }
 
     return (
         <Particles
             id="tsparticles"
-            init={particlesInit}
-            loaded={particlesLoaded}
             options={options}
             className={`absolute inset-0 z-0 ${className}`}
         />
