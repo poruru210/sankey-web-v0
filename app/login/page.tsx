@@ -12,14 +12,11 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Eye, EyeOff, Lock, Mail, AlertCircle, Shield, Key, FileKey } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import Particles from "react-tsparticles"
 import type { Container, Engine } from "tsparticles-engine"
 import { loadSlim } from "tsparticles-slim"
 import { useTheme } from "@/lib/theme-context"
 import { useI18n } from "@/lib/i18n-context"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { LanguageToggle } from "@/components/language-toggle"
-import ParticlesBackground from "@/app/components/ParticlesBackground";
+import {PasswordManagerSafeForm} from "@/app/components/PasswordManagerSafeForm";
 
 export default function LoginPage() {
   const router = useRouter()
@@ -121,7 +118,7 @@ export default function LoginPage() {
             )}
 
             {/* Login Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <PasswordManagerSafeForm onSubmit={handleSubmit} className="space-y-4">
               {/* Email Field */}
               <div className="space-y-2">
                 <Label htmlFor="email" className="theme-text-secondary text-sm font-medium">
@@ -198,7 +195,7 @@ export default function LoginPage() {
                   </div>
                 )}
               </Button>
-            </form>
+            </PasswordManagerSafeForm>
 
             {/* Demo Info */}
             <div className="text-center space-y-3 pt-4 border-t border-emerald-500/20">

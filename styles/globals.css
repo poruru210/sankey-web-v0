@@ -91,4 +91,20 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+
+  /* テーマ読み込み前のフリッカー防止 */
+  /* デフォルトでダークテーマのボーダーカラーを設定 */
+  html:not(.light):not(.dark) {
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+  }
+
+  /* ハイドレーション中の要素を安定化 */
+  input[suppresshydrationwarning] {
+    border-color: hsl(var(--border));
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
 }
