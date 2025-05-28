@@ -1,27 +1,29 @@
 "use client"
 
+import { useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Shield, FileKey, Settings, LogOut, X } from "lucide-react"
+import { Shield, FileKey, Settings, LogOut, X, Loader2 } from "lucide-react"
 import Image from "next/image"
 import { useI18n } from "@/lib/i18n-context"
+import { useAuth } from "@/lib/auth/auth-context"
 
 interface SidebarProps {
     isMobile: boolean
     sidebarOpen: boolean
     setSidebarOpen: (open: boolean) => void
-    handleLogout: () => void
 }
 
 export function Sidebar({
                             isMobile,
                             sidebarOpen,
                             setSidebarOpen,
-                            handleLogout,
                         }: SidebarProps) {
     const { t } = useI18n()
     const router = useRouter()
     const pathname = usePathname()
+    const { signOut, isLoading } = useAuth()
+    const [isLoggingOut, setIsLoggingOut] = useState(false)
 
     const handleNav = (path: string) => {
         router.push(path)
@@ -29,6 +31,23 @@ export function Sidebar({
     }
 
     const isActive = (path: string) => pathname === path
+
+    const handleLogout = async () => {
+        if (!confirm(t("logout.confirm"))) return
+        if (isLoggingOut) return // 重複防止
+
+        setIsLoggingOut(true)
+        try {
+            await signOut() // auth-contextのsignOutを使用
+        } catch (error) {
+            console.error('Sidebar logout error:', error)
+            alert(t("logout.error"))
+        } finally {
+            setIsLoggingOut(false)
+        }
+    }
+
+    const isProcessing = isLoading || isLoggingOut
 
     return (
         <>
@@ -69,13 +88,14 @@ export function Sidebar({
                     {/* Navigation */}
                     <nav className="flex-1 p-4 space-y-2">
                         <Button
-                            variant={isActive("/dashboard") ? "default" : "ghost"}
+                            variant={isActive("/") ? "default" : "ghost"}
                             className={`w-full justify-start ${
-                                isActive("/dashboard")
+                                isActive("/")
                                     ? "bg-emerald-500/20 theme-text-primary"
                                     : "theme-text-secondary hover:theme-text-primary hover:bg-emerald-500/20"
                             }`}
-                            onClick={() => handleNav("/dashboard")}
+                            onClick={() => handleNav("/")}
+                            disabled={isProcessing}
                         >
                             <Shield className="w-4 h-4 mr-2" />
                             {t("nav.dashboard")}
@@ -89,6 +109,7 @@ export function Sidebar({
                                     : "theme-text-secondary hover:theme-text-primary hover:bg-emerald-500/20"
                             }`}
                             onClick={() => handleNav("/developer")}
+                            disabled={isProcessing}
                         >
                             <FileKey className="w-4 h-4 mr-2" />
                             {t("nav.developer")}
@@ -102,6 +123,7 @@ export function Sidebar({
                                     : "theme-text-secondary hover:theme-text-primary hover:bg-emerald-500/20"
                             }`}
                             onClick={() => handleNav("/settings")}
+                            disabled={isProcessing}
                         >
                             <Settings className="w-4 h-4 mr-2" />
                             {t("nav.settings")}
@@ -114,9 +136,14 @@ export function Sidebar({
                             variant="ghost"
                             className="w-full justify-start theme-text-secondary hover:theme-text-primary hover:bg-emerald-500/20"
                             onClick={handleLogout}
+                            disabled={isProcessing}
                         >
-                            <LogOut className="w-4 h-4 mr-2" />
-                            {t("nav.signOut")}
+                            {isLoggingOut ? (
+                                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            ) : (
+                                <LogOut className="w-4 h-4 mr-2" />
+                            )}
+                            {isLoggingOut ? t("logout.loggingOut") : t("nav.signOut")}
                         </Button>
                     </div>
                 </div>

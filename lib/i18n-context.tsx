@@ -85,7 +85,7 @@ const translations = {
     "dialog.deactivateTitle": "Confirm License Deactivation",
     "dialog.deactivateMessage": "Are you sure you want to deactivate the license for",
     "dialog.deactivateWarning":
-      "This action cannot be undone. The license will be deactivated during the next license check.",
+        "This action cannot be undone. The license will be deactivated during the next license check.",
 
     // Settings
     "settings.title": "Settings",
@@ -130,7 +130,7 @@ const translations = {
     "developer.subtitle": "Complete guide for integrating SANKEY license verification into your Expert Advisors",
     "developer.integrationGuide": "EA License Integration Guide",
     "developer.integrationGuideDesc":
-      "Complete guide for integrating SANKEY license verification into your Expert Advisors",
+        "Complete guide for integrating SANKEY license verification into your Expert Advisors",
     "developer.mqhLibrary": "MQH Library",
     "developer.mqhDesc": "Include our header file for easy license verification",
     "developer.dllLibrary": "DLL Library",
@@ -190,6 +190,21 @@ const translations = {
     "login.demoAccess": "Demo Access",
     "login.demoNote": "Any valid email format and 4+ character password will work",
     "login.securedBy": "Secured by advanced encryption",
+    "login.invalidCredentials": "Invalid email or password",
+    "login.userNotFound": "User not found",
+    "login.userNotConfirmed": "Email verification required",
+    "login.tooManyRequests": "Too many requests. Please try again later",
+    "login.authError": "Authentication error occurred",
+    "login.enterEmailPassword": "Please enter both email and password",
+    "login.additionalAuth": "Additional authentication required",
+    "login.loginFailed": "Login failed. Please try again.",
+    "login.invalidEmail": "Please enter a valid email address",
+    "login.sessionExpired": "Session expired, please login again",
+    "login.noRefreshToken": "No refresh token available",
+    "login.noAuthResult": "No authentication result received",
+    "login.checkingAuth": "Checking authentication...",
+    "login.signUpPrompt": "Don't have an account?",
+    "login.signUp": "Sign Up",
 
     // Forgot Password
     "forgotPassword.title": "Reset Password",
@@ -211,6 +226,14 @@ const translations = {
     "forgotPassword.step2": "Click the reset link in the email",
     "forgotPassword.step3": "Follow the instructions to create a new password",
     "forgotPassword.resendEmail": "Didn't receive the email? Send again",
+    "forgotPassword.codeInvalid": "Invalid confirmation code",
+    "forgotPassword.codeExpired": "Confirmation code has expired",
+
+    // Logout
+    "logout.success": "Successfully logged out",
+    "logout.error": "Logout failed. Please try again.",
+    "logout.confirm": "Are you sure you want to log out?",
+    "logout.loggingOut": "Logging out...",
 
     // Footer
     "footer.copyright": "© 2024 SANKEY. All rights reserved.",
@@ -228,6 +251,8 @@ const translations = {
     "common.loading": "Loading...",
     "common.error": "Error",
     "common.success": "Success",
+    "common.authentication": "Authentication",
+    "common.pleaseWait": "Please wait...",
   },
   ja: {
     // Header & Navigation
@@ -374,7 +399,7 @@ const translations = {
     "developer.apiReference": "APIリファレンス",
     "developer.apiReferenceDesc": "利用可能な関数とその使用方法",
     "developer.verifyLicenseDesc":
-      "指定されたライセンスキーが指定されたアカウント番号に対して有効かどうかを確認します。",
+        "指定されたライセンスキーが指定されたアカウント番号に対して有効かどうかを確認します。",
     "developer.getLicenseInfoDesc": "ライセンスに関する詳細情報を取得します。",
     "developer.parameters": "パラメータ:",
     "developer.returns": "戻り値:",
@@ -409,6 +434,21 @@ const translations = {
     "login.demoAccess": "デモアクセス",
     "login.demoNote": "有効なメール形式と4文字以上のパスワードで動作します",
     "login.securedBy": "高度な暗号化により保護",
+    "login.invalidCredentials": "メールアドレスまたはパスワードが正しくありません",
+    "login.userNotFound": "ユーザーが見つかりません",
+    "login.userNotConfirmed": "メールアドレスの確認が必要です",
+    "login.tooManyRequests": "リクエストが多すぎます。しばらく待ってから再試行してください",
+    "login.authError": "認証エラーが発生しました",
+    "login.enterEmailPassword": "メールアドレスとパスワードを入力してください",
+    "login.additionalAuth": "追加の認証が必要です",
+    "login.loginFailed": "ログインに失敗しました。再試行してください。",
+    "login.invalidEmail": "有効なメールアドレスを入力してください",
+    "login.sessionExpired": "セッションが期限切れです。再度ログインしてください",
+    "login.noRefreshToken": "リフレッシュトークンがありません",
+    "login.noAuthResult": "認証結果を受信できませんでした",
+    "login.checkingAuth": "認証状態を確認中...",
+    "login.signUpPrompt": "アカウントをお持ちでない場合",
+    "login.signUp": "新規登録",
 
     // Forgot Password
     "forgotPassword.title": "パスワードリセット",
@@ -430,6 +470,14 @@ const translations = {
     "forgotPassword.step2": "メール内のリセットリンクをクリック",
     "forgotPassword.step3": "手順に従って新しいパスワードを作成",
     "forgotPassword.resendEmail": "メールが届きませんか？再送信",
+    "forgotPassword.codeInvalid": "確認コードが正しくありません",
+    "forgotPassword.codeExpired": "確認コードの有効期限が切れています",
+
+    // Logout
+    "logout.success": "ログアウトしました",
+    "logout.error": "ログアウトに失敗しました。再試行してください。",
+    "logout.confirm": "ログアウトしてもよろしいですか？",
+    "logout.loggingOut": "ログアウト中...",
 
     // Footer
     "footer.copyright": "© 2024 SANKEY. All rights reserved.",
@@ -447,6 +495,8 @@ const translations = {
     "common.loading": "読み込み中...",
     "common.error": "エラー",
     "common.success": "成功",
+    "common.authentication": "認証",
+    "common.pleaseWait": "お待ちください...",
   },
 }
 
