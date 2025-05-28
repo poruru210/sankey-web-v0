@@ -1,27 +1,40 @@
 "use client";
 
+import { useMemo, useEffect, useState } from "react";
+import { useTheme } from "next-themes";
+import type {Container, Engine, IOptions, RecursivePartial} from "tsparticles-engine";
 import dynamic from "next/dynamic";
-import type { Container, Engine, IOptions, RecursivePartial } from "tsparticles-engine";
-import { useMemo } from "react";
 
-// Particles を SSR 無効で動的 import
-const Particles = dynamic(() => import("react-tsparticles").then(mod => mod.default), {
+// Particlesコンポーネントを動的インポートでSSRを無効化
+const Particles = dynamic(() => import("react-tsparticles"), {
     ssr: false,
+    loading: () => <div className="absolute inset-0 z-0" />
 });
 
 type ParticlesBackgroundProps = {
-    theme: "light" | "dark";
+    theme?: "light" | "dark";
     particlesInit?: (engine: Engine) => Promise<void>;
     particlesLoaded?: (container?: Container) => Promise<void>;
     className?: string;
 };
 
 export default function ParticlesBackground({
-                                                theme,
+                                                theme: propTheme,
                                                 particlesInit,
                                                 particlesLoaded,
                                                 className = "",
                                             }: ParticlesBackgroundProps) {
+    const { theme: currentTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    // マウント状態を管理してハイドレーションエラーを防ぐ
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // propTheme が提供されていればそれを使用、そうでなければ currentTheme を使用
+    const effectiveTheme = propTheme || (currentTheme as "light" | "dark") || "dark";
+
     const options = useMemo((): RecursivePartial<IOptions> => ({
         background: {
             color: { value: "transparent" },
@@ -39,12 +52,12 @@ export default function ParticlesBackground({
             },
         },
         particles: {
-            color: { value: theme === "dark" ? "#10b981" : "#059669" },
+            color: { value: effectiveTheme === "dark" ? "#10b981" : "#059669" },
             links: {
-                color: theme === "dark" ? "#10b981" : "#059669",
+                color: effectiveTheme === "dark" ? "#10b981" : "#059669",
                 distance: 150,
                 enable: true,
-                opacity: theme === "dark" ? 0.1 : 0.2,
+                opacity: effectiveTheme === "dark" ? 0.1 : 0.2,
                 width: 1,
             },
             move: {
@@ -59,12 +72,17 @@ export default function ParticlesBackground({
                 density: { enable: true, area: 800 },
                 value: 80,
             },
-            opacity: { value: theme === "dark" ? 0.3 : 0.4 },
+            opacity: { value: effectiveTheme === "dark" ? 0.3 : 0.4 },
             shape: { type: "circle" },
             size: { value: { min: 1, max: 3 } },
         },
         detectRetina: true,
-    }), [theme]);
+    }), [effectiveTheme]);
+
+    // マウントされていない場合はプレースホルダーを表示
+    if (!mounted) {
+        return <div className={`absolute inset-0 z-0 ${className}`} />;
+    }
 
     return (
         <Particles

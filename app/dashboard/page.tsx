@@ -14,7 +14,6 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { Shield, Clock, CheckCircle, History, X, AlertTriangle } from "lucide-react"
-import Particles from "react-tsparticles"
 import type { Container, Engine } from "tsparticles-engine"
 import { loadSlim } from "tsparticles-slim"
 
@@ -24,12 +23,8 @@ import { FilterSection } from "./components/filter-section"
 import { PendingApplications } from "./components/pending-applications"
 import { ActiveLicenses } from "./components/active-licenses"
 import { LicenseHistories } from "./components/license-histories"
-import { MobileHeader } from "./components/mobile-header"
-import {ThemeToggle} from "@/components/theme-toggle";
-import {LanguageToggle} from "@/components/language-toggle";
 import {useI18n} from "@/lib/i18n-context";
-// import { SettingsDialog } from "./components/settings-dialog"
-// import { ChangePlanDialog } from "./components/change-plan-dialog"
+
 
 export default function DashboardPage() {
     const router = useRouter()
@@ -66,14 +61,6 @@ export default function DashboardPage() {
     const [historyCurrentPage, setHistoryCurrentPage] = useState(1)
 
     const [itemsPerPage, setItemsPerPage] = useState(10)
-
-    const particlesInit = useCallback(async (engine: Engine) => {
-        await loadSlim(engine)
-    }, [])
-
-    const particlesLoaded = useCallback(async (container: Container | undefined) => {
-        // Particles loaded callback
-    }, [])
 
     useEffect(() => {
         const checkMobile = () => {
@@ -376,7 +363,7 @@ export default function DashboardPage() {
     }
 
     return (
-        <div className="h-screen">
+        <div>
             <div className="flex-1 flex flex-col min-w-0">
                 <main className="flex-1 container mx-auto px-4 py-8 pb-12 relative z-10">
                     <div className="mb-8">

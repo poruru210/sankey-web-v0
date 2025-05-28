@@ -1,17 +1,17 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { User, Settings } from "lucide-react"
 import Image from "next/image"
+import {ThemeToggle} from "@/components/theme-toggle";
+import {LanguageToggle} from "@/components/language-toggle";
+import React from "react";
 
 interface MobileHeaderProps {
     handleLogoClick: () => void
-    setSettingsOpen: (open: boolean) => void
 }
 
-export function MobileHeader({ handleLogoClick, setSettingsOpen }: MobileHeaderProps) {
+export function MobileHeader({ handleLogoClick }: MobileHeaderProps) {
     return (
-        <header className="border-b border-emerald-500/20 bg-slate-900/80 backdrop-blur-md relative z-10">
+        <header className="theme-bg-gradient border-b  relative z-10">
             <div className="container mx-auto px-4 py-4">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
@@ -26,21 +26,8 @@ export function MobileHeader({ handleLogoClick, setSettingsOpen }: MobileHeaderP
                         </div>
                     </div>
                     <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-emerald-100 hover:text-white hover:bg-emerald-500/20 focus:text-white focus:bg-emerald-500/20"
-                        >
-                            <User className="w-4 h-4" />
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setSettingsOpen(true)}
-                            className="text-emerald-100 hover:text-white hover:bg-emerald-500/20 focus:text-white focus:bg-emerald-500/20"
-                        >
-                            <Settings className="w-4 h-4" />
-                        </Button>
+                        <ThemeToggle />
+                        <LanguageToggle />
                     </div>
                 </div>
             </div>
