@@ -203,6 +203,7 @@ const translations = {
     "login.noRefreshToken": "No refresh token available",
     "login.noAuthResult": "No authentication result received",
     "login.checkingAuth": "Checking authentication...",
+    "login.securingAccess": "Ensuring secure access",
     "login.signUpPrompt": "Don't have an account?",
     "login.signUp": "Sign Up",
 
@@ -447,6 +448,7 @@ const translations = {
     "login.noRefreshToken": "リフレッシュトークンがありません",
     "login.noAuthResult": "認証結果を受信できませんでした",
     "login.checkingAuth": "認証状態を確認中...",
+    "login.securingAccess": "セキュアなアクセスを確保しています",
     "login.signUpPrompt": "アカウントをお持ちでない場合",
     "login.signUp": "新規登録",
 

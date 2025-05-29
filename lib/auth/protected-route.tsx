@@ -1,9 +1,10 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { useAuth } from './auth-context'
+import { useAuth } from '@/lib/auth/auth-context'
 import { Loader2, Shield, AlertCircle } from 'lucide-react'
+import { useI18n } from "@/lib/i18n-context"
 
 interface ProtectedRouteProps {
     children: React.ReactNode
@@ -23,38 +24,21 @@ export function ProtectedRoute({
                                    errorComponent
                                }: ProtectedRouteProps) {
     const { isAuthenticated, isLoading, user } = useAuth()
+    const { t } = useI18n()
     const router = useRouter()
     const pathname = usePathname()
-    const [hasChecked, setHasChecked] = useState(false)
 
     useEffect(() => {
-        if (!isLoading && !hasChecked) {
-            setHasChecked(true)
-
-            if (!isAuthenticated) {
-                // 認証されていない場合、現在のパスを保存してリダイレクト
-                const returnUrl = encodeURIComponent(pathname)
-                const redirectUrl = `${redirectTo}?returnUrl=${returnUrl}`
-
-                console.log('Protected route: User not authenticated, redirecting to:', redirectUrl)
-                router.replace(redirectUrl) // push ではなく replace を使用
-                return
-            }
-
-            // ロールベースのアクセス制御
-            if (requiredRole && user) {
-                const userRole = user.role || user['custom:role'] || 'user'
-                if (userRole !== requiredRole && userRole !== 'admin') {
-                    console.log('Protected route: Insufficient privileges, required:', requiredRole, 'user:', userRole)
-                    router.replace('/unauthorized') // push ではなく replace を使用
-                    return
-                }
-            }
+        if (!isLoading && !isAuthenticated) {
+            // 認証されていない場合、現在のパスを保存してリダイレクト
+            const returnUrl = encodeURIComponent(pathname)
+            const redirectUrl = `${redirectTo}?returnUrl=${returnUrl}`
+            router.replace(redirectUrl)
         }
-    }, [isAuthenticated, isLoading, user, requiredRole, router, redirectTo, pathname, hasChecked])
+    }, [isAuthenticated, isLoading, router, redirectTo, pathname])
 
     // ローディング中
-    if (isLoading || !hasChecked) {
+    if (isLoading) {
         if (loadingComponent) {
             return <>{loadingComponent}</>
         }
@@ -67,10 +51,10 @@ export function ProtectedRoute({
                     </div>
                     <div className="flex items-center space-x-2">
                         <Loader2 className="w-5 h-5 animate-spin text-emerald-400" />
-                        <span className="text-emerald-300 font-medium">認証状態を確認中...</span>
+                        <span className="text-emerald-300 font-medium">{t("login.checkingAuth")}</span>
                     </div>
                     <p className="text-slate-400 text-sm">
-                        セキュアなアクセスを確保しています
+                        {t("login.securingAccess")}
                     </p>
                 </div>
             </div>
